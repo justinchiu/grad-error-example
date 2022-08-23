@@ -42,8 +42,8 @@ def get_error(rng, n_samples):
     def elbo_prior(lpxgz, lpz, obs, z):
         return (
             lpxgz[obs[:,None], z]
-            + lax.stop_gradient(lpxgz[obs[:,None], z] * lpz[z])
-        ).sum(1).mean()
+            + lax.stop_gradient(lpxgz[obs[:,None], z]) * lpz[z]
+        ).mean()
 
     def expected_complete(lpxgz, lpz, obs, z):
         lpxz = lpxgz + lpz
